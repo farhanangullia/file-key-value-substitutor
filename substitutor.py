@@ -13,7 +13,7 @@ def replace_all(text, dic):
     return text
 
 
-def read_and_generate(path, key_vals, prefix, suffix, ext):
+def read_and_generate(path, key_vals, file_name):
     reading_file = open(path, "r")
 
     new_file_content = ""
@@ -22,7 +22,7 @@ def read_and_generate(path, key_vals, prefix, suffix, ext):
         new_file_content += new_line
     reading_file.close()
 
-    writing_file = open("{}_{}.{}".format(prefix, suffix, ext), "w")
+    writing_file = open("{}".format(file_name), "w")
     writing_file.write(new_file_content)
     writing_file.close()
 
@@ -32,18 +32,14 @@ def main():
     parser.add_argument(
         "base_template_path", help="path to input base template for key value replacement")
     parser.add_argument(
-        "output_file_prefix", help="prefix of the output file name")
-    parser.add_argument(
-        "output_file_suffix", help="suffix of the output file name")
-    parser.add_argument(
-        "output_file_extension", help="extension of the output file")
+        "output_file_name", help="output file name and its extension")
     parser.add_argument('--infile', nargs=1,
-                        help="JSON file with key value mappings to replace",
+                        help="JSON file with mappings to replace",
                         type=argparse.FileType('r'))
     arguments = parser.parse_args()
     mappings = json.load(arguments.infile[0])
     read_and_generate(arguments.base_template_path, mappings,
-                      arguments.output_file_prefix, arguments.output_file_suffix, arguments.output_file_extension)
+                      arguments.output_file_name)
 
 
 main()
