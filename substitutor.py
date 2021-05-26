@@ -34,7 +34,7 @@ def main():
     parser.add_argument(
         "output_file_name", help="output file name and its extension")
     parser.add_argument('--infile', nargs=1,
-                        help="JSON file with mappings to replace",
+                        help="JSON file with key value mappings to replace",
                         type=argparse.FileType('r'))
     arguments = parser.parse_args()
     mappings = json.load(arguments.infile[0])
