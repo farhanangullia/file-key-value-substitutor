@@ -3,9 +3,10 @@
 """
 import argparse
 import json
+from typing import Any, Dict
 
 
-def replace_all(text, dic):
+def replace_all(text: str, dic: Dict[str, Any]) -> str:
     for i, j in dic.items():
         if isinstance(j, list):
             j = json.dumps(j)
@@ -13,17 +14,16 @@ def replace_all(text, dic):
     return text
 
 
-def read_and_generate(path, key_vals, file_name):
+def read_and_generate(path: str, key_vals: Dict[str, Any], file_name: str, content_builder: str = None) -> None:
     reading_file = open(path, "r")
 
-    new_file_content = ""
     for line in reading_file:
         new_line = replace_all(line, key_vals)
-        new_file_content += new_line
+        content_builder += new_line
     reading_file.close()
 
     writing_file = open("{}".format(file_name), "w")
-    writing_file.write(new_file_content)
+    writing_file.write(content_builder)
     writing_file.close()
 
 
