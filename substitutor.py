@@ -14,7 +14,7 @@ def replace_all(text: str, dic: Dict[str, Any]) -> str:
     return text
 
 
-def read_and_generate(path: str, key_vals: Dict[str, Any], file_name: str, content_builder: str = None) -> None:
+def read_and_generate(path: str, key_vals: Dict[str, Any], file_name: str, content_builder: str = str()) -> None:
     reading_file = open(path, "r")
 
     for line in reading_file:
@@ -30,14 +30,14 @@ def read_and_generate(path: str, key_vals: Dict[str, Any], file_name: str, conte
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "base_template_path", help="path to input base template for key value replacement")
+        "base_template_path", help="path to input base template for key value replacement", type=str)
     parser.add_argument(
-        "output_file_name", help="output file name and its extension")
-    parser.add_argument('--infile', nargs=1,
+        "output_file_name", help="output file name and its extension", type=str)
+    parser.add_argument('mappings_file', nargs=1,
                         help="JSON file with key value mappings to replace",
                         type=argparse.FileType('r'))
     arguments = parser.parse_args()
-    mappings = json.load(arguments.infile[0])
+    mappings = json.load(arguments.mappings_file[0])
     read_and_generate(arguments.base_template_path, mappings,
                       arguments.output_file_name)
 

@@ -9,7 +9,7 @@ This script helps you generate a new file with substituted values you specify fr
 ## Usage
 
 ```bash
-$ python substitutor.py [--infile INFILE] base_template_path output_file_name
+$ python substitutor.py base_template_path output_file_name mappings_file
 ```
 
 <img src="docs/help.gif" width="500" height="300">
@@ -31,7 +31,7 @@ example/sample_mappings.json:
 #### Demo
 
 ```bash
-$ python substitutor.py example/sample_base_template.tf sample_demo.tf --infile example/sample_mappings.json
+$ python substitutor.py example/sample_base_template.tf sample_demo.tf example/sample_mappings.json
 ```
 
 <img src="docs/example_demo.gif" width="500" height="300">
